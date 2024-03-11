@@ -19,20 +19,6 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
-    val questionnaireFragment = QuestionnaireFragment
-      .builder()
-      .setQuestionnaire(application.assets.open("new-patient-registration-paginated.json").bufferedReader().readText())
-      .build()
-      if (savedInstanceState == null) {
-
-        supportFragmentManager.commit{
-//          setReorderingAllowed(true)
-          add(R.id.fragment_container_view,
-            questionnaireFragment,
-            "QuestionnaireFragment")
-        }
-      }
     }
 
 

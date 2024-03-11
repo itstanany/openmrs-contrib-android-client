@@ -9,8 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import org.hl7.fhir.r4.model.ResourceType
 
-private val Context.dataStorage: DataStore<Preferences> by
-preferencesDataStore(name = "demo_app_storage")
+private val Context.dataStorage: DataStore<Preferences> by preferencesDataStore(name = "demo_app_storage")
 
 /**
  * Stores the lastUpdated timestamp per resource to be used by [DownloadWorkManager]'s

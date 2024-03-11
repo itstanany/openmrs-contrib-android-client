@@ -1,6 +1,7 @@
 package com.itstanany.openmrs_googleOHS
 
 import android.app.Application
+import android.content.Context
 import com.google.android.fhir.DatabaseErrorStrategy.RECREATE_AT_OPEN
 import com.google.android.fhir.FhirEngineConfiguration
 import com.google.android.fhir.FhirEngineProvider
@@ -34,5 +35,11 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
 
   override fun getDataCaptureConfig(): DataCaptureConfig {
     TODO("Not yet implemented")
+  }
+
+  companion object {
+//    fun dataStore(context: Context)= (context.applicationContext as FhirApplication).dataStore
+fun dataStore(context: Context) = (context.applicationContext as FhirApplication).dataStore
+
   }
 }

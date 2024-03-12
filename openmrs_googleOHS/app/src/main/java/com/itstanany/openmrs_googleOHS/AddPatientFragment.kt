@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.commit
 import com.google.android.fhir.datacapture.QuestionnaireFragment
+import org.hl7.fhir.r4.model.QuestionnaireResponse
 
 class AddPatientFragment : Fragment(R.layout.add_patient_fragment) {
 
@@ -21,6 +23,35 @@ class AddPatientFragment : Fragment(R.layout.add_patient_fragment) {
     if (savedInstanceState == null) {
       addQuestionnaireFragment()
     }
+    observePatientSaveAction()
+    childFragmentManager.setFragmentResultListener(
+      QuestionnaireFragment.SUBMIT_REQUEST_KEY,
+      viewLifecycleOwner,
+      { _, _ ->
+        onSubmitAction()
+      }
+    )
+  }
+
+  private fun observePatientSaveAction() {
+    viewModel.isPatientSaved.observe(viewLifecycleOwner) {
+      if(!it) {
+        Toast.makeText(requireContext(), "Inputs Are Missing.", Toast.LENGTH_SHORT).show()
+        return@observe
+      }
+      Toast.makeText(requireContext(), "Patient is saved.", Toast.LENGTH_SHORT).show()
+      // todo: nav up or clear input fields
+    }
+  }
+
+  private fun onSubmitAction() {
+    val questionnaireFragment = childFragmentManager
+      .findFragmentByTag(QUESTIONNAIRE_FRAGMENT_TAG) as QuestionnaireFragment
+    savePatient(questionnaireFragment.getQuestionnaireResponse())
+  }
+
+  private fun savePatient(questionnaireResponse: QuestionnaireResponse) {
+    viewModel.savePatient(questionnaireResponse)
   }
 
   private fun addQuestionnaireFragment() {

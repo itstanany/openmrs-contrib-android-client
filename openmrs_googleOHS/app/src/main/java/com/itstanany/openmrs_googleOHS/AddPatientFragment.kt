@@ -2,6 +2,7 @@ package com.itstanany.openmrs_googleOHS
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,9 @@ class AddPatientFragment : Fragment(R.layout.fragment_add_patient) {
   }
 
   private fun updateArguments() {
-    requireArguments().putString(QUESTIONNAIRE_FILE_PATH_KEY, "new-patient-registration-paginated.json")
+    val args = arguments ?: Bundle()
+    args.putString(QUESTIONNAIRE_FILE_PATH_KEY, "new-patient-registration-paginated.json")
+    Log.d("AddPatientFragment", "Questionnaire file path: ${args.getString(QUESTIONNAIRE_FILE_PATH_KEY)}")
   }
 
   companion object {

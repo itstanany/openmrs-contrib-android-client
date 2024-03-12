@@ -1,6 +1,7 @@
 package com.itstanany.openmrs_googleOHS
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,9 @@ class AddPatientViewModel(
     questionnaireJson?.let {
       return it
     }
-    questionnaireJson = readFileFromAssets(state[AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY]!!)
+    Log.d("AddPatientViewModel", "getQuestionnaireJson: ${AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY}")
+    Log.d("AddPatientViewModel", state.keys().size.toString())
+    questionnaireJson = readFileFromAssets(state.get<String>(AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY)!!)
     return questionnaireJson!!
   }
 

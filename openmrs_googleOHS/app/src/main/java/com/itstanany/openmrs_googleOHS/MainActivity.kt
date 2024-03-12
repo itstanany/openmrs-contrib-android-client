@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract(),
-    ) { res ->
-        runBlocking { onSignInResult(res) }
+    ) { result ->
+        runBlocking { onSignInResult(result) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

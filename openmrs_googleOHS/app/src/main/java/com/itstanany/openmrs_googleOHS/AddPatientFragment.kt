@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.google.android.fhir.datacapture.QuestionnaireFragment
 
-class AddPatientFragment : Fragment(R.layout.fragment_add_patient) {
+class AddPatientFragment : Fragment(R.layout.add_patient_fragment) {
 
   private val viewModel: AddPatientViewModel by viewModels()
 
@@ -36,7 +36,7 @@ class AddPatientFragment : Fragment(R.layout.fragment_add_patient) {
   private fun updateArguments() {
     val args = arguments ?: Bundle()
     args.putString(QUESTIONNAIRE_FILE_PATH_KEY, "new-patient-registration-paginated.json")
-    Log.d("AddPatientFragment", "Questionnaire file path: ${args.getString(QUESTIONNAIRE_FILE_PATH_KEY)}")
+    arguments = args
   }
 
   companion object {

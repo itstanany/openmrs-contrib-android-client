@@ -6,10 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
-class AddPatientViewModel(
-  application: Application,
-  private val state: SavedStateHandle,
-) : AndroidViewModel(application) {
+class AddPatientViewModel(application: Application, private val state: SavedStateHandle) :
+  AndroidViewModel(application) {
 
   private var questionnaireJson: String? = null
   val questionnaire: String
@@ -19,14 +17,12 @@ class AddPatientViewModel(
     questionnaireJson?.let {
       return it
     }
-    Log.d("AddPatientViewModel", "getQuestionnaireJson: ${AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY}")
-    Log.d("AddPatientViewModel", state.keys().size.toString())
-    questionnaireJson = readFileFromAssets(state.get<String>(AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY)!!)
+    questionnaireJson = readFileFromAssets(state[AddPatientFragment.QUESTIONNAIRE_FILE_PATH_KEY]!!)
     return questionnaireJson!!
   }
 
-  private fun readFileFromAssets(fileName: String): String {
-    return getApplication<Application>().assets.open(fileName).bufferedReader().use {
+  private fun readFileFromAssets(filename: String): String {
+    return getApplication<Application>().assets.open(filename).bufferedReader().use {
       it.readText()
     }
   }

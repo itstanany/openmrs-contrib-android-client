@@ -26,11 +26,8 @@ class AddPatientFragment : Fragment(R.layout.add_patient_fragment) {
     observePatientSaveAction()
     childFragmentManager.setFragmentResultListener(
       QuestionnaireFragment.SUBMIT_REQUEST_KEY,
-      viewLifecycleOwner,
-      { _, _ ->
-        onSubmitAction()
-      }
-    )
+      viewLifecycleOwner
+    ) { _, _ -> onSubmitAction() }
   }
 
   private fun observePatientSaveAction() {
